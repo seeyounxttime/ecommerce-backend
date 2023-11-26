@@ -82,7 +82,7 @@ class PaymentController {
       event = stripe.webhooks.constructEvent(
         request.rawBody,
         sig,
-        process.env.ENDPOINTSECRET
+        process.env.ENDPOINT_SECRET
       );
       console.log("payment success");
     } catch (err) {

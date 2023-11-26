@@ -26,7 +26,7 @@ class PaymentController {
     });
     const session = await stripe.checkout.sessions.create({
       shipping_address_collection: {
-        allowed_countries: ["US", "CA"],
+        allowed_countries: ["VN", "JP", "KR"],
       },
       shipping_options: [
         {

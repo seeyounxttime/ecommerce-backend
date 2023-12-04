@@ -6,7 +6,7 @@ class PaymentController {
   async paymentProcess(req, res, next) {
     const { cart, id } = req.body;
     const user = await User.findOne({ _id: id });
-    if (!user) {
+    if (!user) { // kiểm tra user tồn tại mới được thanh toán
       return res.status(404).json({ error: "User not found" });
     }
     const orderData = cart.map((item) => {

@@ -3,7 +3,7 @@ const OrderModel = require("../models/OrderModel");
 const ProductModel = require("../models/ProductModel");
 const Reviews = require("../models/Reviews");
 class Orders {
-  async getOrders(req, res) {
+  async getOrders(req, res) { // lấy thông tin order
     const query = req.query;
     const perPage = 5;
     const skip = (query.page - 1) * perPage;
@@ -25,7 +25,7 @@ class Orders {
       console.log(error.message);
     }
   }
-  async orderDetails(req, res) {
+  async orderDetails(req, res) { // lấy chi tiết order
     const { id } = req.params;
     try {
       const details = await OrderModel.findOne({ _id: id })
@@ -40,7 +40,7 @@ class Orders {
       return res.status(500).json({ errors: error });
     }
   }
-  async updateOrder(req, res) {
+  async updateOrder(req, res) { // cập nhật order
     const { id, status } = req.query;
     let option = {};
     if (status === "delivered") {
@@ -62,7 +62,7 @@ class Orders {
       return res.status(500).json({ errors: error.message });
     }
   }
-  async createRating(req, res) {
+  async createRating(req, res) { // thêm đánh giá
     const errors = validationResult(req);
     const { rating, message, user, product, id } = req.body;
     console.log(req.body);

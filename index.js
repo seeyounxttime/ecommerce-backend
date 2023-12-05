@@ -13,7 +13,7 @@ const app = express();
 connect();
 app.use(
   cors({
-    origin: "https://dtmt-ecommerce.vercel.app/",
+    origin: "https://dtmt-ecommerce.vercel.app",
     METHODS: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   })
 );

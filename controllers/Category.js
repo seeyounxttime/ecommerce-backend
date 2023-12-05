@@ -5,8 +5,8 @@ class Category {
     const errors = validationResult(req);
     const { name } = req.body;
     if (errors.isEmpty()) {
-      const exist = await CatgoryModel.findOne({ name }); // tìm category
-      if (!exist) { // nếu chưa có thì tạo mới, đã có thì thông báo đã có category
+      const exist = await CatgoryModel.findOne({ name }); 
+      if (!exist) { 
         await CatgoryModel.create({ name });
         return res
           .status(201)
@@ -36,7 +36,7 @@ class Category {
       console.log(error.message);
     }
   }
-  async fetchCategory(req, res) { // trả về category
+  async fetchCategory(req, res) { 
     const { id } = req.params;
     try {
       const response = await CatgoryModel.findOne({ _id: id });
@@ -45,13 +45,13 @@ class Category {
       console.log(error.message);
     }
   }
-  async updateCategory(req, res) { // cập nhật category
+  async updateCategory(req, res) {
     const { id } = req.params;
     const { name } = req.body;
     const errors = validationResult(req);
     if (errors.isEmpty()) {
       const exist = await CatgoryModel.findOne({ name });
-      if (!exist) { // nếu có thay đổi mới thì cập nhật, trùng lặp thì thông báo đã có category
+      if (!exist) {
         const response = await CatgoryModel.updateOne(
           { _id: id },
           { $set: { name } }
@@ -68,7 +68,7 @@ class Category {
       return res.status(400).json({ errors: errors.array() });
     }
   }
-  async deleteCategory(req, res) { // xóa category
+  async deleteCategory(req, res) {
     const { id } = req.params;
     try {
       await CatgoryModel.deleteOne({ _id: id });
@@ -80,7 +80,7 @@ class Category {
       return res.status(500).json("Server internal error!");
     }
   }
-  async allCategories(req, res) { // load tất cả category
+  async allCategories(req, res) { 
     try {
       const categories = await CatgoryModel.find({});
       return res.status(200).json({ categories });
@@ -88,7 +88,7 @@ class Category {
       return res.status(500).json("Server internal error!");
     }
   }
-  async randomCategories(req, res) { // load category ngẫu nhiên
+  async randomCategories(req, res) {
     try {
       const categories = await CatgoryModel.aggregate([
         { $sample: { size: 3 } },

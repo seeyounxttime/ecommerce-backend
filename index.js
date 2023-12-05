@@ -11,7 +11,12 @@ const app = express();
 
 // database connection
 connect();
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://dtmt-ecommerce.vercel.app/",
+    METHODS: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  })
+);
 app.post(
   "/api/webhook",
   express.json({
